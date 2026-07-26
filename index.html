@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>TPM Toolkit</title>
+<style>
+  :root {
+    --bg: #faf8f5;
+    --panel: #ffffff;
+    --border: #e6e1d8;
+    --text: #2a2a2a;
+    --muted: #6b6b6b;
+    --accent: #b8541f;
+    --accent-soft: #f4e9e0;
+    --code-bg: #f3efe8;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    height: 100vh;
+    display: flex;
+  }
+  aside {
+    width: 260px;
+    background: var(--panel);
+    border-right: 1px solid var(--border);
+    padding: 24px 0;
+    overflow-y: auto;
+    flex-shrink: 0;
+  }
+  aside h1 {
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--muted);
+    margin: 0 24px 16px;
+    font-weight: 600;
+  }
+  .tool-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  .tool-list li {
+    padding: 12px 24px;
+    cursor: pointer;
+    border-left: 3px solid transparent;
+    font-size: 15px;
+    transition: background 0.15s;
+  }
+  .tool-list li:hover { background: var(--accent-soft); }
+  .tool-list li.active {
+    background: var(--accent-soft);
+    border-left-color: var(--accent);
+    font-weight: 600;
+  }
+  main {
+    flex: 1;
+    padding: 48px 56px;
+    overflow-y: auto;
+  }
+  .tool-detail h2 {
+    margin: 0 0 8px;
+    font-size: 28px;
+    font-weight: 600;
+  }
+  .tool-detail .tagline {
+    color: var(--muted);
+    font-size: 16px;
+    margin-bottom: 32px;
+  }
+  .tool-detail h3 {
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--muted);
+    margin: 28px 0 10px;
+  }
+  .tool-detail p { line-height: 1.6; margin: 0 0 12px; }
+  .command {
+    display: inline-block;
+    background: var(--code-bg);
+    padding: 10px 16px;
+    border-radius: 6px;
+    font-family: "SF Mono", Menlo, monospace;
+    font-size: 15px;
+    color: var(--accent);
+    cursor: pointer;
+    user-select: all;
+    transition: background 0.15s;
+  }
+  .command:hover { background: var(--accent-soft); }
+  .copied {
+    display: inline-block;
+    margin-left: 12px;
+    color: var(--accent);
+    font-size: 13px;
+    opacity: 0;
+    transition: opacity 0.2s;
+  }
+  .copied.show { opacity: 1; }
+  ul.examples { padding-left: 20px; line-height: 1.7; }
+  ul.examples li { margin-bottom: 4px; }
+  .empty-state {
+    color: var(--muted);
+    font-style: italic;
+    margin-top: 80px;
+    text-align: center;
+  }
+</style>
+</head>
+<body>
+<aside>
+  <h1>TPM Toolkit</h1>
+  <ul class="tool-list" id="toolList"></ul>
+</aside>
+<main>
+  <div id="detail" class="tool-detail"></div>
+</main>
+
+<script>
+const tools = [
+  {
+    id: "score",
+    name: "Score",
+    tagline: "A 10-second fitment check on a single job posting.",
+    command: "/score <url>",
+    description: "Takes a job URL (or pasted JD), fetches it, and scores it 1–5 against a fitment rubric you define in rubric.md. Returns Worth Applying (Y/N) and Valid (Y/N) so you know in one glance whether a role is worth pursuing, worth skipping, or needs a manual openness check. It only reads and scores — it never tracks or files anything.",
+    when: "When you spot a one-off role on LinkedIn, in a Slack channel, or from a referral and want an honest gut-check before spending time on it.",
+    examples: [
+      "/score https://boards.greenhouse.io/example/jobs/12345",
+      "/score (then paste the JD text)",
+      "is this job worth applying to"
+    ]
+  },
+  {
+    id: "tailor",
+    name: "Tailor",
+    tagline: "Tailored resume bullets + a cover letter for a specific role.",
+    command: "/tailor <Company>",
+    description: "Reads the JD for a role, picks 3–5 of your existing resume bullets that map to its top asks, and rewrites them to mirror the JD's language — without fabricating anything. Also proposes a re-weighted summary line and drafts a cover letter in your voice, saved as a file. Shares the same fitment logic as Score, and flags honest resume-to-JD gaps to prep for in an interview.",
+    when: "When you've decided a role is worth applying to and you're ready to prepare the actual materials.",
+    examples: [
+      "/tailor Acme",
+      "/tailor (lists your open roles if no company given)",
+      "write a cover letter for this role"
+    ]
+  },
+  {
+    id: "interview-prep",
+    name: "Interview prep",
+    tagline: "A realistic, interviewer-aware mock interview that gets better across sessions.",
+    command: "/interview-prep <Company>",
+    description: "Runs a mock interview that feels like the real thing. First it figures out WHO is interviewing you — recruiter, hiring manager, or peer — and reshapes the whole round to match, because the question set for each is completely different. Then it asks questions cold, one at a time, with no hints or steers (a real interviewer gives you none), and coaches only after each answer. It checks that every behavioral answer opens with a one-line headline before STAR, cross-references your answers against your own story bank, and tracks recurring weaknesses across sessions so prep actually compounds instead of resetting each time. Pulls from four inputs you own: your story bank, your company research, your notes from past sessions, and your own question bank.",
+    when: "Before any interview round. Point it at your own story bank and company research and run 4–6 questions cold, then read the feedback and drill the gaps it flags.",
+    examples: [
+      "/interview-prep Acme",
+      "help me prepare for an interview",
+      "run a mock round for a peer interviewer"
+    ]
+  },
+  {
+    id: "referrals",
+    name: "Referrals",
+    tagline: "Find who in your network can refer you — and who's actually warm. (Design note.)",
+    command: "— concept only —",
+    description: "A design writeup, not runnable code. It describes how to answer \"who can refer me at this company?\" from your own 1st-degree network and gauge how warm each tie is from your message history — using metadata only (a genuine reply matters more than who messaged last), never reading profiles or message contents, never acting on your behalf. It's published as a design note rather than executable code because the working version drives a live logged-in session; the judgment worth showing is the restraint. See the README in skills/referrals/.",
+    when: "Read it as an example of designing a useful automation that stays inside a small, respectful footprint — defined as much by what it refuses to do as by what it does.",
+    examples: [
+      "(concept — see skills/referrals/README.md)"
+    ]
+  }
+];
+
+const list = document.getElementById("toolList");
+const detail = document.getElementById("detail");
+
+function renderDetail(tool) {
+  document.querySelectorAll(".tool-list li").forEach(li => {
+    li.classList.toggle("active", li.dataset.id === tool.id);
+  });
+  detail.innerHTML = `
+    <h2>${tool.name}</h2>
+    <div class="tagline">${tool.tagline}</div>
+
+    <h3>Command</h3>
+    <span class="command" onclick="copyCommand(this, '${tool.command.replace(/'/g, "\\'")}')">${tool.command}</span>
+    <span class="copied">copied</span>
+
+    <h3>What it does</h3>
+    <p>${tool.description}</p>
+
+    <h3>When to use</h3>
+    <p>${tool.when}</p>
+
+    <h3>Examples</h3>
+    <ul class="examples">
+      ${tool.examples.map(ex => `<li><code>${ex}</code></li>`).join("")}
+    </ul>
+  `;
+}
+
+function copyCommand(el, cmd) {
+  navigator.clipboard.writeText(cmd);
+  const c = el.nextElementSibling;
+  c.classList.add("show");
+  setTimeout(() => c.classList.remove("show"), 1200);
+}
+
+tools.forEach((tool, i) => {
+  const li = document.createElement("li");
+  li.textContent = tool.name;
+  li.dataset.id = tool.id;
+  li.onclick = () => renderDetail(tool);
+  list.appendChild(li);
+  if (i === 0) renderDetail(tool);
+});
+</script>
+</body>
+</html>
