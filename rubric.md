@@ -15,28 +15,28 @@ every role is scored without touching any skill.
 A role that misses any of these scores **2 or lower**, regardless of how good
 the rest looks.
 
-1. **Title fit** — the title is `Technical Program Manager`. A bare/mismatched title is a miss.
-2. **Company type** — `product/eng-led, not consulting`.
+1. **Title fit** — the title is `<Technical Program Manager>`. A bare/mismatched title is a miss.
+2. **Company type** — `<product/eng-led, not consulting>`.
 3. **Posting is live** — fetched successfully, posted recently (within
-   `30` days), and not marked closed/filled.
-4. **Location / work authorization** — `Canada`. Treat work
+   `<30>` days), and not marked closed/filled.
+4. **Location / work authorization** — `<Canada>`. Treat work
    authorization as a hard blocker; treat mere geographic *preference* as a
    soft signal (see below).
 
 ## Strong-positive signals (add to the score)
 
-- Domain overlap with your background (`Payments, eCommerce etc`).
+- Domain overlap with your background (`<Payments, eCommerce etc>`).
 - Scope match — headcount, budget, or cross-team breadth in your range.
-- Technical-fluency signals you can speak to (`Distributed systems, REST API etc`).
-- Salary at or above your floor (`eg: 100k CAD`).
+- Technical-fluency signals you can speak to (`<Distributed systems, REST API etc>`).
+- Salary at or above your floor (`<eg: 100k CAD>`).
 - A brand or mission you'd genuinely want to work for.
 
 ## Anti-signals (subtract from the score)
 
-- `Consulting etc` as the *central* requirement.
+- `<Consulting etc>` as the *central* requirement.
 - A title that looks adjacent but is really `coordinator / delivery / status-
   meeting` work.
-- `eg: Staffing firms`.
+- `<eg: Staffing firms>`.
 - Hardware-only scope when you want software, or vice versa.
 
 ## Location as a soft signal (single-role scoring only)
