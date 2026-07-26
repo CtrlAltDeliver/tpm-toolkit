@@ -34,8 +34,8 @@ the rest looks.
 ## Anti-signals (subtract from the score)
 
 - `<Consulting etc>` as the *central* requirement.
-- A title that looks adjacent but is really `coordinator / delivery / status-
-  meeting` work.
+- A title that looks adjacent but is really `<coordinator / delivery / status-
+  meeting>` work.
 - `<eg: Staffing firms>`.
 - Hardware-only scope when you want software, or vice versa.
 
