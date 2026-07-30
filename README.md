@@ -1,6 +1,6 @@
 # tpm-toolkit
 
-**A small set of AI-agent skills I built to run a Technical Program Manager job search — score a role, tailor an application, run a realistic mock interview, and find a warm referral — as slash commands instead of manual busywork.**
+**A small set of AI-agent skills I built to run a Technical Program Manager job search — score a role, tailor an application, find information about a company and the particular role and then run a realistic mock interview, and find a warm referral — as slash commands instead of manual busywork.**
 
 These are [Claude Code](https://docs.claude.com/en/docs/claude-code) skills: a `SKILL.md` is a plain-English instruction file the agent follows when you invoke it. They're readable on their own — no code to run — and easy to adapt to your own search.
 
