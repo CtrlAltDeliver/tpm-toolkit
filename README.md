@@ -1,6 +1,6 @@
 # tpm-toolkit
 
-**A small set of AI-agent skills I built to run a Technical Program Manager job search — score a role, tailor an application, find information about a company and the particular role and then run a realistic mock interview, and find a warm referral — as slash commands instead of manual busywork.**
+**A small set of AI-agent skills I built to run a Technical Program Manager job search — score a role, tailor an application, deep-research a company and the role, run a realistic mock interview, and find a warm referral — as slash commands instead of manual busywork.**
 
 These are [Claude Code](https://docs.claude.com/en/docs/claude-code) skills: a `SKILL.md` is a plain-English instruction file the agent follows when you invoke it. They're readable on their own — no code to run — and easy to adapt to your own search.
 
@@ -14,6 +14,7 @@ A bunch of varied tools in my arsenal, one helps me gather company context and p
 |------|--------------|--------|
 | **[score](skills/score/SKILL.md)** | Scores a single job posting 1–5 against a fitment rubric and returns a Worth-Applying / Valid verdict. A fast gut-check before you spend time on a role. | Runnable skill |
 | **[tailor](skills/tailor/SKILL.md)** | Picks the resume bullets that map to a JD, rewrites them in the JD's language (no fabrication), and drafts a cover letter in your voice. | Runnable skill |
+| **[companyresearch](skills/companyresearch/SKILL.md)** | Deep-researches a company you're interviewing with — strategy, priorities, what the role signals, culture and interview patterns — and writes an "ideal candidate profile" you use as a filter for which of your stories to lead with. Feeds interview-prep. | Runnable skill |
 | **[interview-prep](skills/interview-prep/SKILL.md)** | A realistic, interviewer-aware mock interview — figures out who's interviewing you and reshapes the round, asks cold, coaches after, checks headline-before-STAR, and tracks your weaknesses across sessions so prep compounds. | Runnable skill |
 | **[referrals](skills/referrals/README.md)** | *Design note only.* How to find who in your network can refer you and gauge warmth from message metadata — without opening profiles, quoting messages, or acting on your behalf. | Concept writeup |
 

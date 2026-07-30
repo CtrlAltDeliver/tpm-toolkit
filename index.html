@@ -150,6 +150,19 @@ const tools = [
     ]
   },
   {
+    id: "companyresearch",
+    name: "Company research",
+    tagline: "Deep-research a company — and turn it into a story-selection filter.",
+    command: "/companyresearch <Company>",
+    description: "Goes well past a company snapshot. Grounded in the specific JD, it pulls the company's current strategy and priorities, recent product bets or org shifts, and reads what THIS role is really for — plus the interview process and culture signals that should shape how you tell your stories. Then it writes the part that actually changes how you interview: an \"ideal candidate profile\", a concrete description of the person they're trying to hire (experiences, standout behaviors, impact level and scope), specific enough to use as a filter for which of your own experiences to highlight. Cites sources inline, never fabricates, and saves it all to a company-context file that Interview prep reads as an input.",
+    when: "Once you've landed an interview, before you prep answers. Run it so you walk in knowing their strategy, what the role is really for, and exactly which of your stories to lead with.",
+    examples: [
+      "/companyresearch Acme",
+      "research Acme for my interview",
+      "find company context"
+    ]
+  },
+  {
     id: "interview-prep",
     name: "Interview prep",
     tagline: "A realistic, interviewer-aware mock interview that gets better across sessions.",
