@@ -32,6 +32,15 @@ The referrals tool is published as a **design writeup, not runnable code**. The 
 
 Drop a skill folder into your project's `.claude/skills/` directory and invoke it by name (`/score`, `/tailor`). Point `rubric.md` at your own criteria and the skills work against your files. See the [Claude Code skills docs](https://docs.claude.com/en/docs/claude-code) for details.
 
+## Related repos
+
+These skills are one part of a three-repo set:
+
+| Repo | What it is | How it fits |
+|---|---|---|
+| **[tpm-job-search-kit](https://github.com/CtrlAltDeliver/tpm-job-search-kit)** | The starter kit — folder scaffold, trackers, setup guide, and the `/apply` + `/interview-prep` skills as ready-to-fill templates. | The easiest on-ramp: clone it, add your resume, and these skills work against your files. |
+| **[apply-pipeline](https://github.com/CtrlAltDeliver/apply-pipeline)** | The parallel job-discovery engine (Python) that finds the roles these skills act on. | Feeds the pipeline the `score` and `tailor` skills operate on. |
+
 ## License
 
 MIT — see [LICENSE](LICENSE).
